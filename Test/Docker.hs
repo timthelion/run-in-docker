@@ -41,6 +41,19 @@ import "posix-escape" System.Posix.Escape
  (escapeMany)
 
 ----------------------------------------------------------------
+{-|
+
+"Lift" an executable into docker for improved safety/reproducability of tests.  This should wrap your entire program, rather than arbitrary IO.  AKA, use like this:
+
+````
+main :: IO ()
+main = runInDocker "myDockerImage" realMain
+
+realMain :: IO ()
+realMain = do
+ ...
+````
+-}
 runInDocker
  :: String
  -- ^ Name of docker image to work from
